@@ -6,10 +6,21 @@ public class PlayerController : MonoBehaviour
 {
     // This component will handle player action and state
 
+    [Header("Attributes")]
     [SerializeField]
-    private int health = 100;
+    private int health;
+    [SerializeField]
+    private float speed;
 
-    public float speed = 1.0f;
+    [Header("Bounds")]
+    [SerializeField]
+    private float boundMaxX;
+    [SerializeField]
+    private float boundMinX;
+    [SerializeField]
+    private float boundMaxY;
+    [SerializeField]
+    private float boundMinY;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +45,25 @@ public class PlayerController : MonoBehaviour
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0f);
 
         // Move the player game object
-        transform.Translate(direction * speed * Time.deltaTime);
+        transform.Translate(speed * Time.deltaTime * direction);
+
+        // Keep the player in bounds
+        if (transform.position.y > boundMaxY)
+        {
+            transform.position = new Vector3(transform.position.x, boundMaxY, 0f);
+        }
+        else if (transform.position.y < boundMinY)
+        {
+            transform.position = new Vector3(transform.position.x, boundMinY, 0f);
+        }
+
+        if (transform.position.x > boundMaxX)
+        {
+            transform.position = new Vector3(boundMaxX, transform.position.y, 0f);
+        }
+        else if (transform.position.x < boundMinX)
+        {
+            transform.position = new Vector3(boundMinX, transform.position.y, 0f);
+        }
     }
 }

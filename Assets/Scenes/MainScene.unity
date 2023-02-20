@@ -374,6 +374,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 51
   speed: 4
+  boundMaxX: 5.5
+  boundMinX: -5.5
+  boundMaxY: 2.5
+  boundMinY: -1
 --- !u!1 &961739749
 GameObject:
   m_ObjectHideFlags: 0
