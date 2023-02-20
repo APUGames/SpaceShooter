@@ -378,6 +378,7 @@ MonoBehaviour:
   boundMinX: -5.5
   boundMaxY: 2.5
   boundMinY: -1
+  laser: {fileID: 6200842063897219723, guid: 0e4a70c88e1a44b4cb789e60a0c6fc54, type: 3}
 --- !u!1 &961739749
 GameObject:
   m_ObjectHideFlags: 0

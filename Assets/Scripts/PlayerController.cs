@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float boundMinY;
 
+    [Header("Projectiles")]
+    [SerializeField]
+    private GameObject laser;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +34,12 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        CalculateMovement();
+        ShootLaser();
+    }
+
+    void CalculateMovement()
     {
         // Get X-axis movement
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -64,6 +74,15 @@ public class PlayerController : MonoBehaviour
         else if (transform.position.x < boundMinX)
         {
             transform.position = new Vector3(boundMinX, transform.position.y, 0f);
+        }
+    }
+
+    void ShootLaser()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            // Instantiate the projectile at the position of this transform
+            Instantiate(laser, transform.position, Quaternion.identity);
         }
     }
 }
