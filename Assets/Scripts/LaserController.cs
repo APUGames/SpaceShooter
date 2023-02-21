@@ -8,20 +8,21 @@ public class LaserController : MonoBehaviour
 
     private Vector3 endTranslationPosition;
 
-    private float speed = 0.5f;
+    private float speed = 4f;
     private float timeToDestroy = 2f;
 
     // Start is called before the first frame update
     void Start()
     {
         Destroy(gameObject, timeToDestroy);
-        endTranslationPosition = new Vector3(transform.position.x, transform.position.y + 20f, 0f);
+        // endTranslationPosition = new Vector3(transform.position.x, transform.position.y + 20f, 0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        StartCoroutine(TranslateOverTime(transform, endTranslationPosition, speed));
+        // StartCoroutine(TranslateOverTime(transform, endTranslationPosition, speed));
+        transform.Translate(speed * Time.deltaTime * Vector3.up);
     }
 
     private IEnumerator TranslateOverTime(Transform objToTranslate, Vector3 endPosition, float speed)
