@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,12 @@ public class PlayerController : MonoBehaviour
     private int health;
     [SerializeField]
     private float speed;
+    [SerializeField]
+    private float laserSpawnOffset;
+
+    [Header("Player UI")]
+    [SerializeField]
+    private GameObject healthText;
 
     [Header("Bounds")]
     [SerializeField]
@@ -30,6 +37,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         transform.position = Vector3.zero;
+        healthText.GetComponent<Text>().text = health.ToString();
     }
 
     // Update is called once per frame
@@ -37,9 +45,10 @@ public class PlayerController : MonoBehaviour
     {
         CalculateMovement();
         ShootLaser();
+        UpdateUI();
     }
 
-    void CalculateMovement()
+    private void CalculateMovement()
     {
         // Get X-axis movement
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -77,12 +86,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void ShootLaser()
+    private void ShootLaser()
     {
         if (Input.GetButtonDown("Fire1"))
         {
             // Instantiate the projectile at the position of this transform
-            Instantiate(laser, transform.position, Quaternion.identity);
+            Instantiate(laser, transform.position + new Vector3(0f, laserSpawnOffset, 0f), Quaternion.identity);
         }
+    }
+
+    private void UpdateUI()
+    {
+        healthText.GetComponent<Text>().text = health.ToString();
+    }
+
+    public void EnemyDamage()
+    {
+        health -= 1;
     }
 }

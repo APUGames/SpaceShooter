@@ -31,5 +31,9 @@ public class EnemyController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        else if (other.gameObject.tag == "Player")
+        {
+            other.gameObject.GetComponent<PlayerController>().EnemyDamage();
+        }
     }
 }
