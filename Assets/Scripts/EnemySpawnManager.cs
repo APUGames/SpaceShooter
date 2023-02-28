@@ -6,6 +6,7 @@ public class EnemySpawnManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
 
+    [SerializeField]
     private float queueTime = 2.0f;
     private float currentQueueTime;
 
