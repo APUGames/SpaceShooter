@@ -6,6 +6,10 @@ public class EnemySpawnManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
 
+    public string debugName;
+
+    public Vector3[] spawnPoints;
+
     [SerializeField]
     private float queueTime = 2.0f;
     private float currentQueueTime;
@@ -21,7 +25,10 @@ public class EnemySpawnManager : MonoBehaviour
     {
         if (currentQueueTime < 0f)
         {
-            Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+            // Debug.Log(debugName + " " + transform.position);
+            int spawnLocationIndex = Random.Range(0, spawnPoints.Length);
+            Vector3 spawnLocation = spawnPoints[spawnLocationIndex];
+            Instantiate(enemyPrefab, spawnLocation, Quaternion.identity);
             currentQueueTime = queueTime;
         }
         else

@@ -6,12 +6,12 @@ public class EnemyController : MonoBehaviour
 {
     private float speed = 2f;
 
-    private Vector3 baseLocation = new Vector3(0f, 7.18f, 0f);
+    // private Vector3 baseLocation = new Vector3(0f, 7.18f, 0f);
 
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = baseLocation;
+        // transform.position = baseLocation;
     }
 
     // Update is called once per frame
