@@ -46,6 +46,11 @@ public class PlayerController : MonoBehaviour
         CalculateMovement();
         ShootLaser();
         UpdateUI();
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void CalculateMovement()
@@ -102,6 +107,29 @@ public class PlayerController : MonoBehaviour
 
     public void EnemyDamage()
     {
-        health -= 1;
+        if (health >= 1)
+        {
+            health -= 1;
+        }
+    }
+
+    public void EnemyDamage(EnemyState enemy)
+    {
+        if (health >= 1)
+        {
+            if (enemy.grunt)
+            {
+                health -= 1;
+            }
+            else if (enemy.brute)
+            {
+                health -= 2;
+            }
+        }
+    }
+
+    public int GetHealth()
+    {
+        return health;
     }
 }

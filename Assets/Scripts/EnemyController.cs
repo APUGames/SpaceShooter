@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     private float speed = 2f;
+    private bool hit = false;
 
     // private Vector3 baseLocation = new Vector3(0f, 7.18f, 0f);
 
@@ -27,13 +28,24 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Laser")
+        if (!hit)
         {
-            Destroy(gameObject);
+            if (other.gameObject.tag == "Laser")
+            {
+                hit = true;
+                GameObject.Find("GameManager").GetComponent<GameManager>().SetPlayerPoints(1);
+                Destroy(other.gameObject);
+                Destroy(gameObject);
+            }
+            else if (other.gameObject.tag == "Player")
+            {
+                other.gameObject.GetComponent<PlayerController>().EnemyDamage();
+            }
         }
-        else if (other.gameObject.tag == "Player")
-        {
-            other.gameObject.GetComponent<PlayerController>().EnemyDamage();
-        }
+    }
+
+    public void SetSpeed(float speed)
+    {
+        this.speed = speed;
     }
 }

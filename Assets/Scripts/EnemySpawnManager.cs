@@ -14,6 +14,9 @@ public class EnemySpawnManager : MonoBehaviour
     private float queueTime = 2.0f;
     private float currentQueueTime;
 
+    [SerializeField]
+    private float speed = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +31,8 @@ public class EnemySpawnManager : MonoBehaviour
             // Debug.Log(debugName + " " + transform.position);
             int spawnLocationIndex = Random.Range(0, spawnPoints.Length);
             Vector3 spawnLocation = spawnPoints[spawnLocationIndex];
-            Instantiate(enemyPrefab, spawnLocation, Quaternion.identity);
+            GameObject enemy = Instantiate(enemyPrefab, spawnLocation, Quaternion.identity);
+            enemy.GetComponent<EnemyController>().SetSpeed(speed);
             currentQueueTime = queueTime;
         }
         else
