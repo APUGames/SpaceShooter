@@ -26,18 +26,22 @@ public class EnemySpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentQueueTime < 0f)
+        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        if (!gameManager.GetPlayerWon())
         {
-            // Debug.Log(debugName + " " + transform.position);
-            int spawnLocationIndex = Random.Range(0, spawnPoints.Length);
-            Vector3 spawnLocation = spawnPoints[spawnLocationIndex];
-            GameObject enemy = Instantiate(enemyPrefab, spawnLocation, Quaternion.identity);
-            enemy.GetComponent<EnemyController>().SetSpeed(speed);
-            currentQueueTime = queueTime;
-        }
-        else
-        {
-            currentQueueTime -= Time.deltaTime;
+            if (currentQueueTime < 0f)
+            {
+                // Debug.Log(debugName + " " + transform.position);
+                int spawnLocationIndex = Random.Range(0, spawnPoints.Length);
+                Vector3 spawnLocation = spawnPoints[spawnLocationIndex];
+                GameObject enemy = Instantiate(enemyPrefab, spawnLocation, Quaternion.identity);
+                enemy.GetComponent<EnemyController>().SetSpeed(speed);
+                currentQueueTime = queueTime;
+            }
+            else
+            {
+                currentQueueTime -= Time.deltaTime;
+            }
         }
     }
 }

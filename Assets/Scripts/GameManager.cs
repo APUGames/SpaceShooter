@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject playerScoreText;
     [SerializeField]
+    private GameObject playerWonText;
+    [SerializeField]
     private int playerWinPoints;
 
     private bool playerWon = false;
@@ -44,11 +46,25 @@ public class GameManager : MonoBehaviour
     private void UpdateUI()
     {
         playerScoreText.GetComponent<Text>().text = $"{playerPoints}/{playerWinPoints}";
+
+        if (playerWon)
+        {
+            playerWonText.SetActive(true);
+        }
+        else
+        {
+            playerWonText.SetActive(false);
+        }
     }
 
     public void SetPlayerPoints(int points)
     {
         playerPoints += points;
+    }
+
+    public void SetPlayerWon(bool won)
+    {
+        playerWon = won;
     }
 
     public bool GetPlayerDead()
