@@ -64,6 +64,10 @@ npm install --production
 NODE_ENV=production node app
 ```
 
+```csharp
+Console.WriteLine("Hello, World!");
+```
+
 ## Plugins
 
 Dillinger is currently extended with the following plugins.
